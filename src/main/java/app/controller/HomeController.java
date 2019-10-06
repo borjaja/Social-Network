@@ -30,6 +30,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -48,11 +49,11 @@ public class HomeController {
 		return VIEW_WELCOME;
 	}
 
-	@PostMapping("/create")
-	public ModelAndView createUser(@Valid UserLoginDto user, BindingResult result) {
+	@PostMapping("/")
+	public ModelAndView createUser(@ModelAttribute("user") @Valid UserLoginDto user, BindingResult result) {
 		ModelAndView model = new ModelAndView();
 		model.addObject("user", user);
-		model.setViewName(result.hasErrors() ? "userForm" : "userReady");
+		model.setViewName(result.hasErrors() ? "home" : "home");
 		return model;
 	}
 

@@ -1,15 +1,14 @@
 package app.controller.dto;
 
-import java.io.Serializable;
-
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
-public class UserLoginDto implements Serializable {
+public class UserLoginDto {
 
 	private static final long serialVersionUID = 156L;
 	@Email
-	@NotBlank
+	@NotEmpty(message = "email required.")
 	String email;
 
 	@NotBlank(message = "password required.")
@@ -29,6 +28,11 @@ public class UserLoginDto implements Serializable {
 
 	public void setPass(String pass) {
 		this.pass = pass;
+	}
+
+	@Override
+	public String toString() {
+		return "UserLoginDto [email=" + email + ", pass=" + pass + "]";
 	}
 
 }
