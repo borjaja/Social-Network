@@ -391,7 +391,7 @@
 		<spring.data.version>2.0.7.RELEASE</spring.data.version>
 		<spring.version>5.0.6.RELEASE</spring.version>
 		<thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
-		<webjars.bootstrap.version>3.3.7-1</webjars.bootstrap.version>
+		<webjars.bootstrap.version>4.3.1</webjars.bootstrap.version>
 		<webjars.bootswatch.version>3.3.7</webjars.bootswatch.version>
 		<webjars.fontAwesome.version>4.7.0</webjars.fontAwesome.version>
 		<webjars.datatables.version>1.10.16</webjars.datatables.version>
@@ -440,6 +440,12 @@
 	</dependencyManagement>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.23.1-GA</version>
+		</dependency>
+
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
@@ -789,6 +795,14 @@
 					<configuration>
 						<forkCount>0</forkCount>
 						<reuseForks>false</reuseForks>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>${plugin.surefire.version}</version>
+					<configuration>
+						<forkCount>0</forkCount>
 					</configuration>
 				</plugin>
 				<plugin>

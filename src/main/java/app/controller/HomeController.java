@@ -24,40 +24,36 @@
 
 package app.controller;
 
-import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import javax.validation.Valid;
 
-/**
- * Controller for home view.
- * 
- * @author Bernardo Mart&iacute;nez Garrido
- */
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import app.controller.dto.UserLoginDto;
+
 @Controller
 @RequestMapping("/")
 public class HomeController {
 
-    /**
-     * Name for the welcome view.
-     */
-    private static final String VIEW_WELCOME = "welcome";
+	private static final String VIEW_WELCOME = "home";
 
-    /**
-     * Default constructor.
-     */
-    public HomeController() {
-        super();
-    }
+	@GetMapping
+	public final String showWelcome(Model model) {
+		model.addAttribute("user", new UserLoginDto());
+		return VIEW_WELCOME;
+	}
 
-    /**
-     * Shows the welcome view.
-     * 
-     * @return the welcome view
-     */
-    @GetMapping(produces = MediaType.TEXT_HTML_VALUE)
-    public final String showWelcome() {
-        return VIEW_WELCOME;
-    }
+	@PostMapping("/create")
+	public ModelAndView createUser(@Valid UserLoginDto user, BindingResult result) {
+		ModelAndView model = new ModelAndView();
+		model.addObject("user", user);
+		model.setViewName(result.hasErrors() ? "userForm" : "userReady");
+		return model;
+	}
 
 }

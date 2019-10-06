@@ -20,6 +20,7 @@
 
    <!-- Repositories -->
    <jpa:repositories base-package="app.**.repository" />
+   <jpa:repositories base-package="app.**.dao" />
 
    <!-- ================================== JPA ================================== -->
 
