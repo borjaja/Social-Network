@@ -20,6 +20,7 @@
    <util:list id="baseNames">
       <value>classpath:/messages/application</value>
       <value>classpath:/messages/validation</value>
+      <value>classpath:/messages/messages</value>
    </util:list>
 
 </beans>

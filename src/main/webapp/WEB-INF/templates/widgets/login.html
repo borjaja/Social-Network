@@ -7,11 +7,12 @@
 			</div>  -->
 
 			<h2 class="form-signin-heading">Please sign in</h2>
-			<div th:class="${#fields.hasErrors('email')}?'has-error':''">
-				<label for="inputEmail" class="sr-only">Email address</label>
-				<input th:field="*{email}" class="form-control" placeholder="Email address" autofocus="" type="email">
-				<label class="control-label" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></label> 
+			<div th:class="${#fields.hasErrors('userName')}?'has-error':''">
+				<label for="inputuser" class="sr-only">User</label> 
+				<input th:field="*{userName}"  id="inputuser" class="form-control" placeholder="User" type="text">
+				<label class="control-label" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></label>
 			</div>
+
 			<div th:class="${#fields.hasErrors('pass')}?'has-error':''">
 				<label for="inputPassword" class="sr-only">Password</label> 
 				<input th:field="*{pass}"  id="inputPassword" class="form-control" placeholder="Password" type="password">
@@ -22,5 +23,8 @@
 			</div>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 		</form>
+		<div th:if="${error}" class="error">
+			<li th:each="err : ${error}" th:text="${err}" />
+		</div>
 	</div>
 </section>

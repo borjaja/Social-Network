@@ -21,5 +21,7 @@
 
    <!-- Auto scan -->
    <context:component-scan base-package="app.**.service" />
+   
+   
 
 </beans>

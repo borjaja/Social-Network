@@ -22,10 +22,11 @@
  * SOFTWARE.
  */
 
-package app.controller;
+package app.rest.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,13 +34,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
-import app.controller.dto.UserLoginDto;
+import app.model.exceptions.IncorrectLoginException;
+import app.model.service.UserService;
+import app.rest.dto.UserLoginDto;
 
 @Controller
 @RequestMapping("/")
 public class HomeController {
+
+	@Autowired
+	private UserService userService;
 
 	private static final String VIEW_WELCOME = "home";
 
@@ -50,11 +55,17 @@ public class HomeController {
 	}
 
 	@PostMapping("/")
-	public ModelAndView createUser(@ModelAttribute("user") @Valid UserLoginDto user, BindingResult result) {
-		ModelAndView model = new ModelAndView();
-		model.addObject("user", user);
-		model.setViewName(result.hasErrors() ? "home" : "home");
-		return model;
+	public final String createUser(Model model, @ModelAttribute("user") @Valid UserLoginDto user, BindingResult result)
+			throws IncorrectLoginException {
+		String path;
+		if (result.hasErrors()) {
+			model.addAttribute("user", user);
+			path = "home";
+		} else {
+			userService.login(user.getUserName(), user.getPass());
+			path = "ok";
+		}
+		return path;
 	}
 
 }
