@@ -1,0 +1,16 @@
+<section class="row" th:fragment="login">
+	<div class="col-xs-12 col-sm-9 col-sm-offset-1 col-md-6 col-md-offset-3">
+		<form class="form-signin login" action="#" th:action="@{/user/login} th:object="${user}" method="post">
+
+			<h2 class="form-signin-heading">Please sign in</h2>
+			<label for="inputEmail" class="sr-only">Email address</label>  
+			<input th:field="*{email}" id="inputEmail" class="form-control" placeholder="Email address" autofocus="" type="email"> 
+			<label for="inputPassword" class="sr-only">Password</label> 
+			<input th:field="*{pass}" id="inputPassword" class="form-control" placeholder="Password" type="password">
+			<div class="checkbox">
+				<label> <input value="remember-me" type="checkbox">Remember me</label>
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+		</form>
+	</div>
+</section>
